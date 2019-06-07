@@ -1,6 +1,7 @@
 package in.dailyhunt.resources;
 
 
+import com.codahale.metrics.annotation.Timed;
 import in.dailyhunt.resources.requests.ArraysNumber;
 import in.dailyhunt.resources.responses.SubSetArray;
 
@@ -11,17 +12,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
 
-@Path("/subsets")
+@Path("/dperf")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SubSetResource {
 
+
     @POST
+    @Timed(name = "dpsubarray")
     public SubSetArray getSubArray(ArraysNumber arraysNumber) {
-        System.out.println(Arrays.toString(arraysNumber.getNumbers()));
-        SubSetArray subSetArray = new SubSetArray();
+
         int[][] subsets = getSubsets(arraysNumber.getNumbers());
-        System.out.println(Arrays.toString(subsets));
+        SubSetArray subSetArray = new SubSetArray();
         subSetArray.setArrays(subsets);
         return subSetArray;
     }
