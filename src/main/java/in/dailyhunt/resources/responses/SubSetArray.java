@@ -1,6 +1,7 @@
 package in.dailyhunt.resources.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 public class SubSetArray {
 

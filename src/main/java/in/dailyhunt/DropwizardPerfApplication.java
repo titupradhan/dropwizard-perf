@@ -14,12 +14,13 @@ public class DropwizardPerfApplication extends Application<DropwizardPerfConfigu
 
     @Override
     public void run(DropwizardPerfConfiguration dropwizardPerfConfiguration, Environment environment) throws Exception {
-        SubSetResource subSetResource = new SubSetResource();
+        SubSetResource subSetResource = new SubSetResource(environment.getObjectMapper().getFactory());
         environment.jersey().register(subSetResource);
     }
 
     public static void main(String[] args) throws Exception{
         new DropwizardPerfApplication().run(args);
+        //startReport();
 
     }
 
@@ -28,6 +29,7 @@ public class DropwizardPerfApplication extends Application<DropwizardPerfConfigu
                 .convertRatesTo(TimeUnit.SECONDS)
                 .convertDurationsTo(TimeUnit.MILLISECONDS)
                 .build();
-        reporter.start(1, TimeUnit.SECONDS);
+        reporter.start(5, TimeUnit.SECONDS);
     }
 }
+

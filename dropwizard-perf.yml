@@ -1,3 +1,9 @@
 
 template: Hello, %s!
 defaultName: Stranger
+
+server:
+  requestLog:
+    appenders:
+      - type: console
+        queueSize: 2048
